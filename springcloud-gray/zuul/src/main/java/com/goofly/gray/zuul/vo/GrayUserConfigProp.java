@@ -1,8 +1,14 @@
 package com.goofly.gray.zuul.vo;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.stereotype.Component;
 
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -10,17 +16,15 @@ import java.util.List;
  * @E-mail 709233178@qq.com
  * @date 2019/1/21
  */
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@ConfigurationProperties(prefix = "zuul.gray")
 @Component
 public class GrayUserConfigProp {
 
-    private List<String> userIdList = Arrays.asList("goofly","xli","bob");
-    private String version = "v1";
-
-    public List<String> getUserIdList() {
-        return this.userIdList;
-    }
-
-    public String getVersion() {
-        return this.version;
-    }
+    @Builder.Default
+    private List<String> userIdList = Collections.emptyList();
+    private String version;
 }
