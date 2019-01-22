@@ -43,13 +43,12 @@ public class GrayFilter extends ZuulFilter {
 		RequestContext ctx = RequestContext.getCurrentContext();
 		String token = ctx.getRequest().getHeader(HEADER_TOKEN);
 
-		//String userId = conver2User(token);
 		String userId = token;
-		log.info("======>userId:{}", userId);
+		log.debug("======>userId:{}", userId);
 
 		List<String> userIdList = grayUserConfigProp.getUserIdList();
 		String version = userIdList.contains(userId) ? grayUserConfigProp.getVersion() : null;
-		logger.info("=====>userId:{},version:{}", userId, version);
+		logger.debug("=====>userId:{},version:{}", userId, version);
 
 		// zuul本身调用微服务
 		CoreHeaderInterceptor.initHystrixRequestContext(version);
@@ -57,16 +56,5 @@ public class GrayFilter extends ZuulFilter {
 		ctx.addZuulRequestHeader(CoreHeaderInterceptor.HEADER_VERSION, version);
 
 		return null;
-	}
-
-	/**
-	 * 获取用户token
-	 */
-	private String conver2User(String token) {
-		if(StringUtils.isEmpty(token) || !token.contains(".")) {
-			return null;
-		}
-		String header = token.split(".")[0];
-		return new String(Base64.decode(header));
 	}
 }

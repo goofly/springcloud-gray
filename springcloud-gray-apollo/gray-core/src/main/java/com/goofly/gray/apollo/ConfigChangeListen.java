@@ -54,7 +54,7 @@ public class ConfigChangeListen{
 	private void someOnChange(ConfigChangeEvent changeEvent) {
 		changeEvent.changedKeys().forEach(key -> {
 			ConfigChange change = changeEvent.getChange(key);
-			logger.info("Found change - key: {}, oldValue: {}, newValue: {}, changeType: {}",change.getPropertyName(), change.getOldValue(), change.getNewValue(), change.getChangeType());
+			logger.debug("Found change - key: {}, oldValue: {}, newValue: {}, changeType: {}",change.getPropertyName(), change.getOldValue(), change.getNewValue(), change.getChangeType());
 			
 			// 灰度配置
 			if(GrayInfoVO.version.equals(change.getPropertyName())) {
@@ -66,7 +66,7 @@ public class ConfigChangeListen{
 	            	HttpPut httpPut = new HttpPut(connUrl+"apps/"+appname+"/"+instanceId+"/metadata?version="+value);
 	                //httpPut.setEntity(new StringEntity("version, v1"));
 	            	
-	            	logger.info("======>请求url:{}",httpPut.getURI());
+	            	logger.debug("======>请求url:{}",httpPut.getURI());
 	            	
 	                ResponseHandler<String> responseHandler = response -> {
 	                    int status = response.getStatusLine().getStatusCode();
@@ -78,7 +78,7 @@ public class ConfigChangeListen{
 	                    }
 	                };
 	                String responseBody = httpclient.execute(httpPut, responseHandler);
-	                logger.info("======返回结果:{}",responseBody);
+	                logger.debug("======返回结果:{}",responseBody);
 	            } catch (IOException e) {
 					e.printStackTrace();
 				}

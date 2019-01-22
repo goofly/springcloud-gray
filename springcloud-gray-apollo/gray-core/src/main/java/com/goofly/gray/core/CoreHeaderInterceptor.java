@@ -20,7 +20,7 @@ public class CoreHeaderInterceptor extends HandlerInterceptorAdapter {
 	public static final HystrixRequestVariableDefault<String> version = new HystrixRequestVariableDefault<>();
 
 	public static void initHystrixRequestContext(String headerVer) {
-		logger.info("initHystrixRequestContext headerVer:{}", headerVer);
+		logger.debug("headerVer:{}", headerVer);
 		if (!HystrixRequestContext.isCurrentThreadInitialized()) {
 			HystrixRequestContext.initializeContext();
 		}

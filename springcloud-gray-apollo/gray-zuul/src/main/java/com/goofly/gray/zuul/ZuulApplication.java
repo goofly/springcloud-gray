@@ -1,5 +1,6 @@
 package com.goofly.gray.zuul;
 
+import com.goofly.gray.core.annotation.EnableGrayConfig;
 import com.goofly.gray.zuul.filter.GrayFilter;
 import com.goofly.gray.zuul.filter.GrayPostZuulFilter;
 import org.springframework.boot.SpringApplication;
@@ -14,7 +15,7 @@ import org.springframework.web.filter.CorsFilter;
 @SpringBootApplication
 @EnableDiscoveryClient
 @EnableZuulProxy
-//@Import(ApolloConfig.class)
+@EnableGrayConfig
 public class ZuulApplication {
 	@Bean
 	public GrayFilter grayFilter() {

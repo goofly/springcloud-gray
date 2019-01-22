@@ -52,8 +52,7 @@
     </pluginRepositories>
     <modules>
         <module>gray-core</module>
-        <module>eureka</module>
-        <module>zuul</module>
+        <module>gray-zuul</module>
         <module>gray-demo-provider</module>
         <module>gray-demo-consumer</module>
     </modules>
