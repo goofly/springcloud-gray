@@ -311,7 +311,7 @@ Resttemplate请求方式
 
 fegin请求方式
 
-![zuul-服务-fegin](https://image-static.segmentfault.com/405/525/405525019-5c18a560541ab)
+![](https://image-static.segmentfault.com/405/525/405525019-5c18a560541ab)
 
 
 
