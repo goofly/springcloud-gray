@@ -52,7 +52,46 @@ eureka.instance.metadata-map.version = v1
 	}
 ```
 
+这样一来，只需要通过修改配置文件然后就会触发监听事件从而自动触发请求eureka更改元数据的值。
 
+
+
+## 动态路由
+
+在通过zuul调用服务时一般有两种方式
+
+**方式1：**
+
+​    在通过zuul调用服务时，加上服务名称后直接调用该服务的接口即可。但是这样的话可能就对外暴露了我们的服务名称了。
+
+```java
+# 8000为zuul端口
+http://localhost:8000/provider-test/user/getId?id=111
+```
+
+**方式2：**
+通过配置将servicesId和path做一个映射关系，如下
+
+```java
+zuul.routes.users.path=/pt/**
+zuul.routes.users.serviceId=provider-test
+```
+
+​    但是，这样固定的写法带来的弊端也非常明显。如果想要修改path或者说有新的服务想要加入，那意味着得重新启动zuul服务让其生效。
+
+### 动态路由使用
+
+在网关zuul整合了动态路由功能，监听Apollo配置文件使其修改配置文件后可以马上生效。
+
+**配置示例**
+
+```java
+url.map.provide-test = /pt/**
+```
+
+`url.map.`为固定写法，`provide-test`为服务名称，`/pt/**`为映射路径
+
+[参考文章](https://blog.csdn.net/u013815546/article/details/68944039)
 
 ## 灰度使用
 
