@@ -1,0 +1,2 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  com.goofly.gray.core.CoreAutoConfiguration,com.goofly.gray.core.RulePropertiesConfig
